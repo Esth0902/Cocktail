@@ -5,55 +5,79 @@
 @inject FavService FavService
 
 <h1>Search for a cocktail</h1>
-<EditForm Model ="@this" OnValidSubmit="SearchCocktails">
-<DataAnnotationsValidator/>
 <p>
-    <input type="search" @bind="searchName" placeholder="Cocktail's name" />
+    <input type="search" @bind="searchName" placeholder="Cocktail's name or first letter" />
 </p>
-<ValidationMessage For="@(() => searchName)"/>
 
 <p>
 
-    <button @onclick="SearchCocktails" disabled="@string.IsNullOrWhiteSpace(searchName)">Search by name</button>
-    <button @onclick="SearchCocktailsByFirstLetter" disabled="@string.IsNullOrWhiteSpace(searchName)">Search by first letter</button>
+    <button @onclick="SearchCocktails">Search by name</button>
+    <button @onclick="SearchCocktailsByFirstLetter">Search by first letter</button>
     <button @onclick="GetRandomCocktail">Random Cocktail</button><br/>
 </p>
-</EditForm>
 
-@if (cocktails.Count == 0)
+
+@if (cocktails != null)
 {
-<p>@response</p>
+    if (cocktails.Count == 0)
+    {
+        <p>No cocktail found.</p>
+    }
+
+    else
+    {
+        <ul>
+            @foreach (var cocktail in cocktails)
+            {
+                <li>
+                    <div class="cocktail-item">
+                        <!-- Nom du cocktail et image alignés sur la même ligne -->
+                        <div class="cocktail-header">
+                            <img class="cocktail-image" src="@cocktail.StrDrinkThumb" alt="@cocktail.StrDrink" width="100"/>
+                            <div class ="cocktail-name-container">
+                                <h4 class="cocktail-name">
+                                    @cocktail.StrDrink
+                                    <input id="@($"heart-{cocktail.StrDrink}")" type="checkbox"
+                                           checked="@FavService.favoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink)"
+                                           @onchange="@(e => FavService.ToggleFavorite(cocktail))">
+                                    <label for="@($"heart-{cocktail.StrDrink}")">❤</label> 
+                                </h4>
+                                <p class="cocktail-info">@cocktail.StrAlcoholic cocktail that should be served in a @cocktail.StrGlass.ToLower()</p>
+                            </div>
+                        </div>
+                        
+                        <details class="cocktail-details">
+                            <summary>Instructions</summary>
+                            <p>@cocktail.StrInstructions</p>
+                        </details>
+                        
+                        <details class="cocktail-details">
+                            <summary>Ingredients</summary>
+                            <ul>
+                                @for (int i = 0; i < cocktail.Ingredients.Count; i += 2)
+                                {
+                                <li>
+                                    @cocktail.Ingredients[i]
+                                    @if (i + 1 < cocktail.Ingredients.Count)
+                                    {
+                                    @(": " + cocktail.Ingredients[i + 1])
+                                    }
+                                </li>
+                                }
+                            </ul>
+                        </details>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
 }
-else
-{
-    <ul>
-        @foreach (var cocktail in cocktails)
-        {
-            <li>
-                <h4>
-                    @cocktail.StrDrink
-                    <input id="@($"heart-{cocktail.StrDrink}")" type="checkbox"
-                           checked="@FavService.favoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink)"
-                           @onchange="@(e => FavService.ToggleFavorite(cocktail))">
-                    <label for="@($"heart-{cocktail.StrDrink}")">❤</label>
-                </h4>
-                <img src="@cocktail.StrDrinkThumb" alt="@cocktail.StrDrink" width="100"/>
-                <p>@cocktail.StrAlcoholic cocktail that should be served in a @cocktail.StrGlass.ToLower()</p>
-                <p><strong>Instructions :</strong> @cocktail.StrInstructions</p>
-                <p><strong>Ingredients : </strong>
-                    @for (int i = 0; i < cocktail.Ingredients.Count; i++)
-                    {
-                        @cocktail.Ingredients[i]
-                        @(i % 2 == 0 && i < cocktail.Ingredients.Count - 1 ? " : " : " ")
-                    }
-                </p>
-            </li>
-        }
-    </ul>
-}
+
 
 @code {
+    
     private string searchName = "";
+    private string error = "";
     private List<Cocktail> cocktails;
     private string response = "";
 
@@ -61,28 +85,47 @@ else
     {
         if (string.IsNullOrWhiteSpace(searchName))
         {
-            response = "Enter the name of the cocktail you're looking for";
             return;
         }
-        cocktails = await CocktailService.GetCocktailsByNameAsync(searchName);
+        try
+        {
+            cocktails = await CocktailService.GetCocktailsByNameAsync(searchName);
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     private async Task SearchCocktailsByFirstLetter()
     {
-        if (searchName.Length > 1)
+        if (string.IsNullOrWhiteSpace(searchName) || searchName.Length > 1)
         {
-            response = "Only one letter allowed";
             return;
         }
-        cocktails = await CocktailService.GetCocktailsByFirstLetterAsync(searchName);
+
+        try
+        {
+            cocktails = await CocktailService.GetCocktailsByFirstLetterAsync(searchName);
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        
     }
 
     private async Task GetRandomCocktail()
     {
-        var cocktail = await CocktailService.GetRandomCocktailAsync();
-        cocktails = new List<Cocktail> { cocktail };
+        try
+        {
+            var cocktail = await CocktailService.GetRandomCocktailAsync();
+            cocktails = new List<Cocktail> { cocktail };
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
-    
-    
 }
 

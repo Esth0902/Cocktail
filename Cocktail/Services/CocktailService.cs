@@ -14,7 +14,7 @@ public class CocktailService
     // Récupérer une liste de cocktails par nom
     public async Task<List<Models.Cocktail>> GetCocktailsByNameAsync(string name)
     {
-        var response = await _httpClient.GetFromJsonAsync<CocktailResponse>($"search.php?s={name}");
+        var response = await _httpClient.GetFromJsonAsync<CocktailResponse>($"search.php?s={name}"); 
         return response?.Drinks ?? new List<Models.Cocktail>();
     }
 
