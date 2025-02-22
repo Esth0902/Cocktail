@@ -7,7 +7,7 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: #470404;
 }
 
 .btn-primary {
@@ -120,7 +120,7 @@ label[for^="heart-"] {
 
 /* Effet hover sur le label */
 label[for^="heart-"]:hover {
-    color: rgba(163, 105, 113, 0.8);
+    color: rgb(106, 70, 70);
 }
 
 /* Empêche la sélection du label */
@@ -136,7 +136,7 @@ label[for^="heart-"]::moz-selection {
 
 /* Style quand le bouton est coché */
 input[type="checkbox"][id^="heart-"]:checked + label {
-    color: rgba(142, 3, 19, 0.8);
+    color: rgb(99, 3, 3);
     will-change: font-size;
     animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
 }
@@ -153,7 +153,7 @@ input[type="checkbox"][id^="heart-"]:checked + label {
 @keyframes heart {0%, 17.5% {font-size: 0;}}
 
 button {
-    background-color: rgba(163, 105, 113, 0.8); /* Couleur de fond du bouton d’envoi */
+    background-color: rgb(67, 85, 57); /* Couleur de fond du bouton d’envoi */
     color: white;                    /* Couleur du texte sur le bouton */
     border: none;                    /* Supprime la bordure par défaut */
     padding: 10px 20px;              /* Ajoute un padding de 10px en haut/bas et 20px sur les côtés */
@@ -164,18 +164,34 @@ button {
 }
 
 button:hover {
-    background-color: rgba(142, 3, 19, 0.8); /* Change la couleur de fond du bouton au survol */
+    background-color: rgba(20, 62, 4, 0.8); /* Change la couleur de fond du bouton au survol */
 }
 
 li {
     list-style: none;
 }
 
-input [type="search"] {
+input[type="search"] {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid rgb(67, 85, 57);
     border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="search"]:focus {
+    border-color: rgba(20, 62, 4, 0.8);
+    box-shadow: 0 0 10px rgb(67, 85, 57);
+}
+
+input[type="search"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+input[type="search"]:hover {
+    border-color: rgb(22, 62, 2);
 }

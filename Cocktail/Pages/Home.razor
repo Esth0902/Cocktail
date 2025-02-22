@@ -5,19 +5,22 @@
 @inject FavService FavService
 
 <h1>Search for a cocktail</h1>
-
-<input type="search" @bind="searchName" placeholder="Cocktail's name" />
-<button @onclick="SearchCocktails">Search by name</button>
-<button @onclick="SearchCocktailsByFirstLetter">Search by first letter</button>
-<button @onclick="GetRandomCocktail">Random Cocktail</button>
+<p>
+    <input type="search" @bind="searchName" placeholder="Cocktail's name" />
+</p>
+<p>
+    <button @onclick="SearchCocktails">Search by name</button>
+    <button @onclick="SearchCocktailsByFirstLetter">Search by first letter</button>
+    <button @onclick="GetRandomCocktail">Random Cocktail</button><br/>
+</p>
 
 @if (cocktails == null)
 {
-<p>Entrez un nom et cliquez sur rechercher.</p>
+<p></p>
 }
 else if (cocktails.Count == 0)
 {
-<p>Aucun cocktail trouvé.</p>
+<p>No cocktail found.</p>
 }
 else
 {
