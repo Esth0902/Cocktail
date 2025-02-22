@@ -1,0 +1,35 @@
+﻿@page "/favorites"
+@using Cocktail.Models
+@using Cocktail.Services
+@inject CocktailService CocktailService
+@inject FavService FavService
+
+<PageTitle>Favorites</PageTitle>
+
+<h1>Your favorite cocktails</h1>
+
+@if (FavService.favoriteCocktails.Any())
+{
+    <ul>
+        @foreach (var favorite in FavService.favoriteCocktails)
+        {
+            <li>
+                <h4>
+                    @favorite.StrDrink
+                    <input id="@($"heart-{favorite.StrDrink}")" type="checkbox"
+                           checked="@FavService.IsFavorite(favorite)"
+                           @onchange="@(e => FavService.ToggleFavorite(favorite))">
+                    <label for="@($"heart-{favorite.StrDrink}")">❤</label>
+                </h4>
+                
+                <img src="@favorite.StrDrinkThumb" alt="@favorite.StrDrink" width="100" />
+                <p>@favorite.StrAlcoholic cocktail that should be served in a @favorite.StrGlass?.ToLower()</p>
+                <p><strong>Instructions:</strong> @favorite.StrInstructions</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No favorite cocktails yet.</p>
+}

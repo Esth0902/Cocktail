@@ -101,3 +101,81 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+
+/* Cache toutes les cases à cocher des favoris */
+input[type="checkbox"][id^="heart-"] {
+    position: absolute;
+    left: -100vw;
+}
+
+/* Style de base du label associé aux cases à cocher */
+label[for^="heart-"] {
+    color: #aab8c2;
+    cursor: pointer;
+    font-size: 1em;
+    align-self: center;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Effet hover sur le label */
+label[for^="heart-"]:hover {
+    color: rgba(163, 105, 113, 0.8);
+}
+
+/* Empêche la sélection du label */
+label[for^="heart-"]::selection {
+    color: none;
+    background: transparent;
+}
+
+label[for^="heart-"]::moz-selection {
+    color: none;
+    background: transparent;
+}
+
+/* Style quand le bouton est coché */
+input[type="checkbox"][id^="heart-"]:checked + label {
+    color: rgba(142, 3, 19, 0.8);
+    will-change: font-size;
+    animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+}
+
+/* Animation de pulsation quand on ajoute aux favoris */
+@keyframes heart {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+
+
+@keyframes heart {0%, 17.5% {font-size: 0;}}
+
+button {
+    background-color: rgba(163, 105, 113, 0.8); /* Couleur de fond du bouton d’envoi */
+    color: white;                    /* Couleur du texte sur le bouton */
+    border: none;                    /* Supprime la bordure par défaut */
+    padding: 10px 20px;              /* Ajoute un padding de 10px en haut/bas et 20px sur les côtés */
+    font-size: 1rem;                 /* Définit la taille du texte */
+    cursor: pointer;                 /* Change le curseur pour pointer */
+    border-radius: 5px;              /* Ajoute des coins arrondis au bouton */
+    transition: background-color 0.3s; /* Ajoute une transition de couleur de fond en 0.3s */
+}
+
+button:hover {
+    background-color: rgba(142, 3, 19, 0.8); /* Change la couleur de fond du bouton au survol */
+}
+
+li {
+    list-style: none;
+}
+
+input [type="search"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
