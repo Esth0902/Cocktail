@@ -29,25 +29,25 @@
                     </div>
                     
                     <details class="cocktail-details">
-                        <summary>Instructions</summary>
-                        <p>@favorite.StrInstructions</p>
-                    </details>
-                    
-                    <details class="cocktail-details">
                         <summary>Ingredients</summary>
                         <ul>
                             @for (int i = 0; i < favorite.Ingredients.Count; i += 2)
                             {
-                            <li>
-                                @favorite.Ingredients[i]
-                                @if (i + 1 < favorite.Ingredients.Count)
-                                {
-                                @(": " + favorite.Ingredients[i + 1])
-                                }
-                            </li>
+                                <li>
+                                    @favorite.Ingredients[i]
+                                    @if (i + 1 < favorite.Ingredients.Count)
+                                    {
+                                        @(": " + favorite.Ingredients[i + 1])
+                                    }
+                                </li>
                             }
                         </ul>
                     </details>
+                    <details class="cocktail-details">
+                        <summary>Instructions</summary>
+                        <p>@favorite.StrInstructions</p>
+                    </details>
+                    
                 </div>
             </li>
         }

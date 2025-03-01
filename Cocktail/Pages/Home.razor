@@ -46,24 +46,23 @@
                         </div>
                         
                         <details class="cocktail-details">
-                            <summary>Instructions</summary>
-                            <p>@cocktail.StrInstructions</p>
-                        </details>
-                        
-                        <details class="cocktail-details">
                             <summary>Ingredients</summary>
                             <ul>
                                 @for (int i = 0; i < cocktail.Ingredients.Count; i += 2)
                                 {
-                                <li>
-                                    @cocktail.Ingredients[i]
-                                    @if (i + 1 < cocktail.Ingredients.Count)
-                                    {
-                                    @(": " + cocktail.Ingredients[i + 1])
-                                    }
-                                </li>
+                                    <li>
+                                        @cocktail.Ingredients[i]
+                                        @if (i + 1 < cocktail.Ingredients.Count)
+                                        {
+                                            @(": " + cocktail.Ingredients[i + 1])
+                                        }
+                                    </li>
                                 }
                             </ul>
+                        </details>
+                        <details class="cocktail-details">
+                            <summary>Instructions</summary>
+                            <p>@cocktail.StrInstructions</p>
                         </details>
                     </div>
                 </li>
