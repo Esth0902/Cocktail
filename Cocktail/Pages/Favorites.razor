@@ -13,17 +13,42 @@
         @foreach (var favorite in FavService.favoriteCocktails)
         {
             <li>
-                <h4>
-                    @favorite.StrDrink
-                    <input id="@($"heart-{favorite.StrDrink}")" type="checkbox"
-                           checked="@FavService.IsFavorite(favorite)"
-                           @onchange="@(e => FavService.ToggleFavorite(favorite))">
-                    <label for="@($"heart-{favorite.StrDrink}")">❤</label>
-                </h4>
-                
-                <img src="@favorite.StrDrinkThumb" alt="@favorite.StrDrink" width="100" />
-                <p>@favorite.StrAlcoholic cocktail that should be served in a @favorite.StrGlass?.ToLower()</p>
-                <p><strong>Instructions:</strong> @favorite.StrInstructions</p>
+                <div class="cocktail-item">
+                    <div class="cocktail-header">
+                        <img src="@favorite.StrDrinkThumb" alt="@favorite.StrDrink" width="100"/>
+                        <div class="cocktail-name-container">
+                            <h4 class="cocktail-name">
+                                @favorite.StrDrink
+                                <input id="@($"heart-{favorite.StrDrink}")" type="checkbox"
+                                       checked="@FavService.IsFavorite(favorite)"
+                                       @onchange="@(e => FavService.ToggleFavorite(favorite))">
+                                <label for="@($"heart-{favorite.StrDrink}")">❤</label>
+                            </h4>
+                            <p class="cocktail-info">@favorite.StrAlcoholic cocktail that should be served in a @favorite.StrGlass?.ToLower()</p>
+                        </div>
+                    </div>
+                    
+                    <details class="cocktail-details">
+                        <summary>Instructions</summary>
+                        <p>@favorite.StrInstructions</p>
+                    </details>
+                    
+                    <details class="cocktail-details">
+                        <summary>Ingredients</summary>
+                        <ul>
+                            @for (int i = 0; i < favorite.Ingredients.Count; i += 2)
+                            {
+                            <li>
+                                @favorite.Ingredients[i]
+                                @if (i + 1 < favorite.Ingredients.Count)
+                                {
+                                @(": " + favorite.Ingredients[i + 1])
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </details>
+                </div>
             </li>
         }
     </ul>
