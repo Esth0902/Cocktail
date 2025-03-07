@@ -39,9 +39,7 @@ public class CocktailServiceIntegrationTests
         var result = await _cocktailService.GetCocktailsByNameAsync("Vodka");
         
         // Assert
-
-        Assert.NotNull(result);
-        Assert.NotEmpty(result);
+        result.Should().NotBeNullOrEmpty();
     }
 
     [Fact]
@@ -50,9 +48,19 @@ public class CocktailServiceIntegrationTests
         // Act
         var result = await _cocktailService.GetRandomCocktailAsync();
         var drink = result.StrDrink;
+        
         // Assert
-        Assert.NotNull(drink);
-        Assert.NotEmpty(drink);
+        drink.Should().NotBeNullOrEmpty();
+    }
+    
+    [Fact]
+    public async Task GetCocktailsByFirsLetterAsync_ShouldReturnResults()
+    {
+        // Act
+        var result = await _cocktailService.GetCocktailsByFirstLetterAsync("V");
+        
+        // Assert
+        result.Should().NotBeNullOrEmpty();
     }
     
 }

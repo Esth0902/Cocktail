@@ -5,7 +5,10 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c9103358_002Dca75_002D4f8e_002D8b0e_002Dd7a1c6f5dac8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Get_retrieves_cocktail" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::B43413AA-8F78-41F7-BF3A-72D4019329B1::net8.0::CocktailTests.CocktailServiceIntegrationTests.Get_retrieves_cocktail&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B43413AA-8F78-41F7-BF3A-72D4019329B1::net8.0::CocktailTests.CocktailServiceIntegrationTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B43413AA-8F78-41F7-BF3A-72D4019329B1::net8.0::CocktailTests.FavServiceTests.ToggleFavorite_ShouldAddCocktailToFavorites&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B43413AA-8F78-41F7-BF3A-72D4019329B1::net8.0::CocktailTests.FavServiceTests.ToggleFavorite_ShouldRemoveCocktailFromFavorites&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B43413AA-8F78-41F7-BF3A-72D4019329B1::net8.0::CocktailTests.FavServiceTests.IsFavorite_ShouldReturnTrueIfCocktailIsInFavorites&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d7e872b9_002Dfd34_002D4ed7_002D94af_002Dd306eff54516/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
