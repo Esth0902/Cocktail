@@ -5,6 +5,7 @@ using Cocktail.Services;
 using Xunit;
 using System.Net.Http;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 public class CocktailServiceIntegrationTests
 {
@@ -21,11 +22,22 @@ public class CocktailServiceIntegrationTests
     }
 
     [Fact]
+    public async Task Get_retrieves_cocktailDB()
+        {
+            // Act
+            var response = await _httpClient.GetAsync("https://www.thecocktaildb.com");
+            
+            // Assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+    
+    
+    [Fact]
     public async Task GetCocktailsByNameAsync_ShouldReturnResults()
     {
         // Act
         var result = await _cocktailService.GetCocktailsByNameAsync("Vodka");
-        var drink = result.FirstOrDefault(); 
+        
         // Assert
 
         Assert.NotNull(result);
