@@ -40,14 +40,20 @@ public class Cocktail
     public string StrMeasure13 { get; set; }
     public string StrMeasure14 { get; set; }
     public string StrMeasure15 { get; set; }
-    public List<string> Ingredients => new List<string>
-        {
-            StrIngredient1, StrMeasure1, StrIngredient2, StrMeasure2, StrIngredient3, StrMeasure3, StrIngredient4, StrMeasure4, StrIngredient5, StrMeasure5,
-            StrIngredient6, StrMeasure6, StrIngredient7, StrMeasure7, StrIngredient8, StrMeasure8, StrIngredient9, StrMeasure9, StrIngredient10, StrMeasure10,
-            StrIngredient11, StrMeasure11, StrIngredient12, StrMeasure12, StrIngredient13, StrMeasure13, StrIngredient14, StrMeasure14, StrIngredient15, StrMeasure15
-        }
-        .Where(i => !string.IsNullOrEmpty(i)) // Supprime les valeurs nulles ou vides
-        .ToList();
+    public List<string> Ingredients
+    {
+        get => new List<string>
+            {
+                StrIngredient1, StrMeasure1, StrIngredient2, StrMeasure2, StrIngredient3, StrMeasure3, StrIngredient4,
+                StrMeasure4, StrIngredient5, StrMeasure5,
+                StrIngredient6, StrMeasure6, StrIngredient7, StrMeasure7, StrIngredient8, StrMeasure8, StrIngredient9,
+                StrMeasure9, StrIngredient10, StrMeasure10,
+                StrIngredient11, StrMeasure11, StrIngredient12, StrMeasure12, StrIngredient13, StrMeasure13,
+                StrIngredient14, StrMeasure14, StrIngredient15, StrMeasure15
+            }
+            .Where(i => !string.IsNullOrEmpty(i)) // Supprime les valeurs nulles ou vides
+            .ToList();
+    }
 }
 
 public class CocktailResponse
