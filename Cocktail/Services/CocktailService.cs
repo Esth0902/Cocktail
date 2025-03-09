@@ -2,8 +2,13 @@
 using Cocktail.Models;
 
 namespace Cocktail.Services;
-
-public class CocktailService
+public interface ICocktailService
+{
+    Task<List<Models.Cocktail>> GetCocktailsByNameAsync(string name);
+    Task<List<Models.Cocktail>> GetCocktailsByFirstLetterAsync(string letter);
+    Task<Models.Cocktail> GetRandomCocktailAsync();
+}
+public class CocktailService : ICocktailService
 {
     private readonly HttpClient _httpClient;
     public CocktailService(HttpClient httpClient)

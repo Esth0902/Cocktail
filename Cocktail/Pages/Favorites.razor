@@ -1,16 +1,16 @@
 ﻿@page "/favorites"
 
 @using Cocktail.Services
-@inject FavService FavService
+@inject IFavService FavService
 
 <PageTitle>Favorites</PageTitle>
 
 <h1>Your favorite cocktails</h1>
 
-@if (FavService.favoriteCocktails.Any())
+@if (FavService.FavoriteCocktails.Any())
 {
     <ul>
-        @foreach (var favorite in FavService.favoriteCocktails)
+        @foreach (var favorite in FavService.FavoriteCocktails)
         {
             <li>
                 <div class="cocktail-item">

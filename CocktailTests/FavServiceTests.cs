@@ -32,10 +32,10 @@ public class FavServiceTests
         await _favService.ToggleFavorite(cocktail);
 
         // Assert
-       _favService.favoriteCocktails.Should().Contain(cocktail);
+       _favService.FavoriteCocktails.Should().Contain(cocktail);
        
        _testOutputHelper.WriteLine(cocktail.StrDrink);
-       foreach (var fav in _favService.favoriteCocktails)
+       foreach (var fav in _favService.FavoriteCocktails)
        {
            _testOutputHelper.WriteLine(fav.StrDrink);
        }
@@ -46,13 +46,13 @@ public class FavServiceTests
     {
         // Arrange
         var cocktail = new Cocktail { StrDrink = "Rum Coca" };
-        _favService.favoriteCocktails.Add(cocktail);
+        _favService.FavoriteCocktails.Add(cocktail);
 
         // Act
         await _favService.ToggleFavorite(cocktail);
 
         // Assert
-        _favService.favoriteCocktails.Should().BeEmpty();
+        _favService.FavoriteCocktails.Should().BeEmpty();
     }
 
     [Fact]
@@ -60,7 +60,7 @@ public class FavServiceTests
     {
         // Arrange
         var cocktail = new Cocktail { StrDrink = "Margarita" };
-        _favService.favoriteCocktails.Add(cocktail);
+        _favService.FavoriteCocktails.Add(cocktail);
 
         // Act
         var result = _favService.IsFavorite(cocktail);

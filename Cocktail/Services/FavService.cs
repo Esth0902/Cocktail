@@ -2,10 +2,19 @@
 using Cocktail.Models;
 namespace Cocktail.Services;
 
-public class FavService
+public interface IFavService
+{
+    List<Models.Cocktail> FavoriteCocktails { get; }
+    
+    Task ToggleFavorite(Models.Cocktail cocktail);
+    Task LoadFavorites();
+    bool IsFavorite(Models.Cocktail cocktail);
+}
+
+public class FavService : IFavService
 {
     private readonly ILocalStorageService _localStorage; // Gestion du Local Storage
-    public List<Models.Cocktail> favoriteCocktails { get; set; } = [];
+    public List<Models.Cocktail> FavoriteCocktails { get; set; } = new List<Models.Cocktail>();
 
     public FavService(ILocalStorageService localStorage)
     {
@@ -14,13 +23,13 @@ public class FavService
     
     public async Task ToggleFavorite(Models.Cocktail cocktail)
     {
-        if (favoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink))
+        if (FavoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink))
         {
-            favoriteCocktails.RemoveAll(c => c.StrDrink == cocktail.StrDrink);
+            FavoriteCocktails.RemoveAll(c => c.StrDrink == cocktail.StrDrink);
         }
         else
         {
-            favoriteCocktails.Add(cocktail);
+            FavoriteCocktails.Add(cocktail);
         }
 
         await SaveFavorites();
@@ -28,20 +37,17 @@ public class FavService
     
     private async Task SaveFavorites()
     {
-        await _localStorage.SetItemAsync("favoriteCocktails", favoriteCocktails);
+        await _localStorage.SetItemAsync("favoriteCocktails", FavoriteCocktails);
     }
 
     public async Task LoadFavorites()
     {
         var storedFavorites = await _localStorage.GetItemAsync<List<Models.Cocktail>>("favoriteCocktails");
-        if (storedFavorites != null)
-        {
-            favoriteCocktails = storedFavorites;
-        }
+        FavoriteCocktails = storedFavorites ?? new List<Models.Cocktail>();
     }
     
     public bool IsFavorite(Models.Cocktail cocktail)
     {
-        return favoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink);
+        return FavoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink);
     }
 }

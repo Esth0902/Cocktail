@@ -1,8 +1,8 @@
 ﻿@page "/"
 @using Cocktail.Models
 @using Cocktail.Services
-@inject CocktailService CocktailService
-@inject FavService FavService
+@inject ICocktailService CocktailService
+@inject IFavService FavService
 
 <h1>Search for a cocktail</h1>
 <p>
@@ -37,7 +37,7 @@
                                 <h4 class="cocktail-name">
                                     @cocktail.StrDrink
                                     <input id="@($"heart-{cocktail.StrDrink}")" type="checkbox"
-                                           checked="@FavService.favoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink)"
+                                           checked="@FavService.FavoriteCocktails.Any(c => c.StrDrink == cocktail.StrDrink)"
                                            @onchange="@(e => FavService.ToggleFavorite(cocktail))">
                                     <label for="@($"heart-{cocktail.StrDrink}")">❤</label> 
                                 </h4>
