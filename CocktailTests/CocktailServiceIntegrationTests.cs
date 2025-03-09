@@ -1,5 +1,3 @@
-using System.Data;
-
 namespace CocktailTests;
 using Cocktail.Services;
 using Xunit;
@@ -14,6 +12,8 @@ public class CocktailServiceIntegrationTests
 
     public CocktailServiceIntegrationTests()
     {
+        // Arrange
+        
         _httpClient = new HttpClient
         {
             BaseAddress = new Uri("https://www.thecocktaildb.com/api/json/v1/1/")

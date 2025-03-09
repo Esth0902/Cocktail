@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using Cocktail.Models;
 namespace Cocktail.Services;
 
 public interface IFavService
