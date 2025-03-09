@@ -76,7 +76,6 @@
 @code {
     
     private string searchName = "";
-    private string error = "";
     public List<Cocktail> cocktails;
     private string response = "";
 
@@ -106,6 +105,7 @@
         try
         {
             cocktails = await CocktailService.GetCocktailsByFirstLetterAsync(searchName);
+            
         }
         catch (HttpRequestException ex)
         {
@@ -123,6 +123,7 @@
         }
         catch (HttpRequestException ex)
         {
+
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
